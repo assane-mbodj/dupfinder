@@ -1,6 +1,6 @@
-# DUPFinder: Detection tools of Duplicates gene 
+# DUPFinder: Detection tools of Duplicated genes
 
-DUPfinder est un outils qui permet de caractèriser les gènes dupliqués en se basant sur la détection des variations structurales (CNV) et particulièrement des duplications dà partir un échantillon ou d'une population d'échantillons.
+DUPfinder is a tool to characterize duplicated genes based on the detection of structural variations (CNV) and especially duplications from a sample or a population of samples.
 
 ## Table of contents
 
