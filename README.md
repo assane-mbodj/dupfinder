@@ -24,7 +24,7 @@ DUPfinder is a tool to characterize duplicated genes based on the detection of s
 * Detection of duplication gene using the annotation file [Bedtools][bedtools]
 
 <p align="center">
-    <img title="DUPFinder Workflow" src="image/dupfinder_workflow.png" width=60%>
+    <img title="DUPFinder Workflow" src="dupfinder_workflow.png" width=60%>
 </p>
 
 ## Installation
@@ -32,8 +32,6 @@ DUPfinder is a tool to characterize duplicated genes based on the detection of s
 ### Prerequisites
 
 DUPFinder can only be installed on Linux systems and requires Anaconda/Miniconda (Python 3.9+) to be present on the system.
-
-/* `python3-dev`, `git`, `gawk`, `python>=3.9`, `delly`, `smoove`, `duphold`, ` SURVIVOR`, ` bcftools`, `numpy`, ` pysam`, ` bwa`, ` samtools>=1.10`, `htslib>=1.10`, `bedtools`, `pip`, `dysgu` */
 
 All steps of Hecaton are run using the [`Nextflow`](https://www.nextflow.io/docs/latest/getstarted.html#installation) (`>=22.10`) workflow language.
 
@@ -59,12 +57,14 @@ bash install.sh
 #Step 4. Activate the environnement dupfinder_env:
 
 conda activate dupfinder_env
+```
 
+## Index Reference genome
 
-## Index
+Before starting, create index file for the reference genome to reduce mapping time using the command following.
+
 ```bash
-# before starting, create index file for the reference genome to reduce mapping time.
- 
+
 # build index accordingly
 
 bwa index reference.fa 
