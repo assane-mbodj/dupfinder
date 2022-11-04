@@ -24,7 +24,7 @@ DUPfinder is a tool to characterize duplicated genes based on the detection of s
 * Detection of duplication gene using the annotation file [Bedtools][bedtools]
 
 <p align="center">
-    <img title="DUPFinder Workflow" src="dupfinder_workflow.png" width=60%>
+    <img title="DUPFinder Workflow" src="dupfinder_workflow.png" width=30%>
 </p>
 
 ## Installation
