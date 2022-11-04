@@ -42,7 +42,7 @@ All steps of Hecaton are run using the [`Nextflow`](https://www.nextflow.io/docs
 
 #Step 1. Download the dUPFinder :
 
-git clone https://github.com/assane/dupfinder.git
+git clone https://github.com/assane-mbodj/dupfinder
 
 #Step 2. Go to dupfinder folder
 
