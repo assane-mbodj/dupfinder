@@ -17,11 +17,11 @@ DUPfinder is a tool to characterize duplicated genes based on the detection of s
 
 ## Workflow of DUPFinder
 
-* Aligning reads to a reference genome using [bwa mem][bwa mem]
-* Calling CNVs using the structural variant callers [Delly][delly], [Dysgu][Dysgu] and [Delly][delly]
-* Post-processing each set of CNVs to keep the duplications and remove false positives [Duphold][duphold], [Bcftools][bcftools]
-* Merging all sets of duplications into one large set [SURVIVOR][Survivor]
-* Detection of duplication gene using the annotation file [Bedtools][bedtools]
+* Aligning reads to a reference genome using [**bwa mem**]
+* Calling CNVs using the structural variant callers **[Delly**], [**Dysgu**] and [**Delly**]
+* Post-processing each set of CNVs to keep the duplications and remove false positives [**Duphold**], [**Bcftools**]
+* Merging all sets of duplications into one large set [**SURVIVOR**]
+* Detection of duplication gene using the annotation file [**Bedtools**]
 
 <p align="center">
     <img title="DUPFinder Workflow" src="dupfinder_workflow.png" width=45%>
