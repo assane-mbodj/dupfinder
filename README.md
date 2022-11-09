@@ -4,6 +4,7 @@ DUPfinder is a tool to characterize duplicated genes based on the detection of s
 
 ## Table of contents
 
+-[introduction](#introduction)
 - [Workflow of Hecaton](#overview)
 - [Installation](#install)
   - [Prerequisites](#prerequisites)
@@ -12,7 +13,12 @@ DUPfinder is a tool to characterize duplicated genes based on the detection of s
   - [Running multiple samples at once](#multiple)
 
 
+##Introduction
 
+DUPFinder is a tool developed for the detection of gene duplications from next generation sequencing (NGS) data using paired-end Illumina reads. 
+It is specifically designed for plant data but can work well with human data with a reference genome and gene annotation file.
+
+The pipeline is built using nextflow, a workflow tool that makes it very easy to run tasks across multiple computational infrastructures. It uses containers like Docker or Singularity or cross-platform package and environment managers like Conda; these make the workflow more reproducible. The Nextflow implementation on this pipeline uses the Conda package manager which easily manages the maintenance and update of the software used by the pipeline as well as the dependencies.
 
 
 ## Workflow of DUPFinder
