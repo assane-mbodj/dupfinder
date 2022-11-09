@@ -4,7 +4,7 @@ DUPfinder is a tool to characterize duplicated genes based on the detection of s
 
 ## Table of contents
 
--[introduction]
+-[introduction](#introduction)
 - [Workflow of Hecaton](#overview)
 - [Installation](#install)
   - [Prerequisites](#prerequisites)
