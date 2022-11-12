@@ -136,11 +136,11 @@ process variant_calling {
 	script:
 	"""
 	
-	delly call -g ${genome_file} ${pair_id}.sort.bam -o ${pair_id}.delly.bcf
+	delly call --map-qual 10 --min-clique-size 1 -g ${genome_file} ${pair_id}.sort.bam -o ${pair_id}.delly.bcf
 	
 	bcftools view ${pair_id}.delly.bcf > ${pair_id}.delly.vcf
 	
-	dysgu run --clean -p4 ${genome_file} temp_dir ${pair_id}.sort.bam > ${pair_id}.dysgu.vcf
+	dysgu run --clean --mq 10 --min-size 50 -p4 ${genome_file} temp_dir ${pair_id}.sort.bam > ${pair_id}.dysgu.vcf
 	
 	smoove call --name ${pair_id} --outdir smoove/ --fasta ${genome_file} -p 4 ${pair_id}.sort.bam 
 	
@@ -184,7 +184,7 @@ process vcf_filter {
 	
 	duphold -t 4 -v ${pair_id}.dysgu.DUP.vcf -b ${pair_id}.sort.bam -f ${genome_file} -o ${pair_id}.dysgu.DUP_duphold.vcf
 	
-	bcftools view -i "(FMT/DHFC[0]>=1.5 & FMT/DHFFC[0]>=1.5 & FMT/DHBFC[0]>=1.5)" ${pair_id}.dysgu.DUP_duphold.vcf > ${pair_id}.dysgu.DUP_fc1.5.vcf
+	bcftools view -i "((FMT/DHFC[0]>=1.3 & FMT/DHFFC[0]>=1.3 & FMT/DHBFC[0]>=1.3) || (INFO/SR>1 && INFO/PE>1))" ${pair_id}.dysgu.DUP_duphold.vcf > ${pair_id}.dysgu.DUP_fc1.5.vcf
 	
 	bcftools view -i '(SVTYPE = "DUP")' ${pair_id}.delly.vcf > ${pair_id}.delly.DUP.vcf
 	
@@ -192,7 +192,7 @@ process vcf_filter {
 	export DUPHOLD_SAMPLE_NAME=${pair_id}
 	
 	duphold -t 4 -v ${pair_id}.delly.DUP.vcf -b ${pair_id}.sort.bam -f ${genome_file} -o ${pair_id}.delly.DUP_duphold.vcf
-	bcftools view -i "(FMT/DHFC[0]>=1.5 & FMT/DHFFC[0]>=1.5 & FMT/DHBFC[0]>=1.5)" ${pair_id}.delly.DUP_duphold.vcf > ${pair_id}.delly.DUP_fc1.5.vcf
+	bcftools view -i "(FMT/DHFC[0]>=1.3 & FMT/DHFFC[0]>=1.3 & FMT/DHBFC[0]>=1.3)" ${pair_id}.delly.DUP_duphold.vcf > ${pair_id}.delly.DUP_fc1.5.vcf
 	
 	bcftools view -i '(SVTYPE = "DUP")' ${pair_id}.smoove.vcf > ${pair_id}.smoove.DUP.vcf
 	
@@ -201,7 +201,7 @@ process vcf_filter {
 	
 	duphold -t 4 -v ${pair_id}.smoove.DUP.vcf -b ${pair_id}.sort.bam -f ${genome_file} -o ${pair_id}.smoove.DUP_duphold.vcf
 	
-	bcftools view -i "(FMT/DHFC[0]>=1.5 & FMT/DHFFC[0]>=1.5 & FMT/DHBFC[0]>=1.5)" ${pair_id}.smoove.DUP_duphold.vcf > ${pair_id}.smoove.DUP_fc1.5.vcf
+	bcftools view -i "((FMT/DHFC[0]>=1.3 & FMT/DHFFC[0]>=1.3 & FMT/DHBFC[0]>=1.3) || (INFO/SR>1 && INFO/PE>1))" ${pair_id}.smoove.DUP_duphold.vcf > ${pair_id}.smoove.DUP_fc1.5.vcf
 	
 	ls ${pair_id}.dysgu.DUP_fc1.5.vcf ${pair_id}.delly.DUP_fc1.5.vcf ${pair_id}.smoove.DUP_fc1.5.vcf > ${pair_id}.txt
 	
