@@ -118,7 +118,7 @@ process align {
  */
 
 process variant_calling {	
-	publishDir "${params.out}/vcf_file", mode:'copy'
+	publishDir "${params.out}/variant_calls", mode:'copy'
 	label "multithreading"
 	label "delly"
 	label "dysgu"
@@ -131,7 +131,7 @@ process variant_calling {
 	file genome_file  
 
 	output:
-	tuple val(pair_id), file("*.vcf"), file(reads) into vcf_file_ch
+	tuple val(pair_id), file("*.vcf"), file(reads) into variant_calls_ch
 	
 	script:
 	"""
@@ -156,7 +156,7 @@ process variant_calling {
  */
 
 process vcf_filter {
-	publishDir "${params.out}/vcf_annoted", mode:'copy'
+	publishDir "${params.out}/duplication_annot_calls", mode:'copy'
 	label "multithreading"
 	label "bcftools"
 	label "duphold"
@@ -164,7 +164,7 @@ process vcf_filter {
 	tag "Filter vcf file: ${pair_id}"
 	
 	input:
-	tuple val(pair_id), file(vcf), file(bam) from vcf_file_ch
+	tuple val(pair_id), file(vcf), file(bam) from variant_calls_ch
 	file genome_file
 	
 	output:
@@ -172,7 +172,7 @@ process vcf_filter {
 	file("${pair_id}.delly.DUP_fc1.5.vcf")
 	file("${pair_id}.smoove.DUP_fc1.5.vcf")
 	file("*duphold.vcf")	
-	tuple val(pair_id), file("${pair_id}.merged.DUP_survivor.vcf") into vcf_annoted_ch
+	tuple val(pair_id), file("${pair_id}.merged.DUP_survivor.vcf") into duplication_annot_calls_ch
 	
 	script:
 	
@@ -184,7 +184,7 @@ process vcf_filter {
 	
 	duphold -t 4 -v ${pair_id}.dysgu.DUP.vcf -b ${pair_id}.sort.bam -f ${genome_file} -o ${pair_id}.dysgu.DUP_duphold.vcf
 	
-	bcftools view -i "((FMT/DHFC[0]>=1.3 & FMT/DHFFC[0]>=1.3 & FMT/DHBFC[0]>=1.3) || (INFO/SR>1 && INFO/PE>1))" ${pair_id}.dysgu.DUP_duphold.vcf > ${pair_id}.dysgu.DUP_fc1.5.vcf
+	bcftools view -i "((FMT/DHFC[0]>=1.3 & FMT/DHFFC[0]>=1.3 & FMT/DHBFC[0]>=1.3) || (INFO/PE>=1 && INFO/SR>=1))" ${pair_id}.dysgu.DUP_duphold.vcf > ${pair_id}.dysgu.DUP_fc1.5.vcf
 	
 	bcftools view -i '(SVTYPE = "DUP")' ${pair_id}.delly.vcf > ${pair_id}.delly.DUP.vcf
 	
@@ -201,11 +201,11 @@ process vcf_filter {
 	
 	duphold -t 4 -v ${pair_id}.smoove.DUP.vcf -b ${pair_id}.sort.bam -f ${genome_file} -o ${pair_id}.smoove.DUP_duphold.vcf
 	
-	bcftools view -i "((FMT/DHFC[0]>=1.3 & FMT/DHFFC[0]>=1.3 & FMT/DHBFC[0]>=1.3) || (INFO/SR>1 && INFO/PE>1))" ${pair_id}.smoove.DUP_duphold.vcf > ${pair_id}.smoove.DUP_fc1.5.vcf
+	bcftools view -i "((FMT/DHFC[0]>=1.3 & FMT/DHFFC[0]>=1.3 & FMT/DHBFC[0]>=1.3) || (INFO/PE>=1 && INFO/SR>=1))" ${pair_id}.smoove.DUP_duphold.vcf > ${pair_id}.smoove.DUP_fc1.5.vcf
 	
 	ls ${pair_id}.dysgu.DUP_fc1.5.vcf ${pair_id}.delly.DUP_fc1.5.vcf ${pair_id}.smoove.DUP_fc1.5.vcf > ${pair_id}.txt
 	
-	SURVIVOR merge ${pair_id}.txt 10 1 1 1 0 50 ${pair_id}.merged.DUP_survivor.vcf
+	SURVIVOR merge ${pair_id}.txt 50 2 1 1 0 50 ${pair_id}.merged.DUP_survivor.vcf
 	
 	"""
 }		
@@ -222,7 +222,7 @@ process duplicate_Gene {
 	tag "Détection of duplicate gene: ${pair_id}"
 	
 	input:
-	tuple val(pair_id), file(gene) from vcf_annoted_ch
+	tuple val(pair_id), file(gene) from duplication_annot_calls_ch
 	file(annotation)
 	
 	output:
@@ -239,9 +239,9 @@ process duplicate_Gene {
 	awk -F '\t' '{if(\$5>500) {print \$0}}' ${pair_id}.bed > ${pair_id}.merged.DUP_survivor.bed
 	
 	
-	bedtools intersect -a ${annotation} -b ${pair_id}.merged.DUP_survivor.bed -f 0.005 -wa| bedtools sort | uniq > ${pair_id}.gene_duplicated.bed
+	bedtools intersect -a ${annotation} -b ${pair_id}.merged.DUP_survivor.bed -f 0.1 -wa| bedtools sort | uniq > ${pair_id}.gene_duplicated.bed
 	
-	bedtools intersect -a ${annotation} -b ${pair_id}.merged.DUP_survivor.bed -f 0.005 -wo| bedtools sort | uniq > ${pair_id}.gene_duplicated_bis.csv
+	bedtools intersect -a ${annotation} -b ${pair_id}.merged.DUP_survivor.bed -f 0.1 -wo| bedtools sort | uniq > ${pair_id}.gene_duplicated_bis.csv
 	
 	"""
 }
