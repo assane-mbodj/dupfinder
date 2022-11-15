@@ -30,7 +30,7 @@ The pipeline is built using nextflow, a workflow tool that makes it very easy to
 * Detection of duplication gene using the annotation file [**Bedtools**]
 
 <p align="center">
-    <img title="DUPFinder Workflow" src="dupfinder_workflow.png" width=45%>
+    <img title="DUPFinder workflow/dupfinder_pipeline.png" src="dupfinder_workflow.png" width=45%>
 </p>
 
 ## Installation
