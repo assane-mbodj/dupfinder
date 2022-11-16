@@ -13,4 +13,6 @@ mv smoove ~/anaconda3/envs/dupfinder_env/bin/ && \
 wget https://github.com/brentp/duphold/releases/download/v0.2.3/duphold 
 
 chmod 755 duphold && \
-mv duphold ~/anaconda3/envs/dupfinder_env/bin/
+mv duphold ~/anaconda3/envs/dupfinder_env/bin/ 
+
+rm -rf lumpy-sv
