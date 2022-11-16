@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 #lumpy-sv
 sudo apt install lumpy-sv && \
