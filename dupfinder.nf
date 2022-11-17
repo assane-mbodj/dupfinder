@@ -98,6 +98,7 @@ process align {
 	file genome_bwa_bwt_file
 	file genome_bwa_pac_file
 	file genome_bwa_sa_file
+	file genome_index_file
 
     output:
     set val(pair_id), file("${pair_id}*") into aligned_reads_ch
@@ -106,8 +107,7 @@ process align {
     """
      
     bwa mem -t ${task.cpus} -R "@RG\\tID:${pair_id}\\tSM:${pair_id}\\tLB:${pair_id}" ${genome_file} ${reads[0]} ${reads[1]} | samtools view -u -bS | samtools sort > ${pair_id}.sort.bam
-    
-        samtools index  ${pair_id}.sort.bam          
+    samtools index ${pair_id}.sort.bam          
     """    
 }
 
@@ -219,7 +219,7 @@ process duplicate_Gene {
 	publishDir "${params.out}/duplicated_gene", mode:'move'
 	label "bcftools"
 	label "bedtools"
-	tag "Détection of duplicate gene: ${pair_id}"
+	tag "Detection of duplicated genes"
 	
 	input:
 	tuple val(pair_id), file(gene) from duplication_annot_calls_ch
@@ -227,25 +227,21 @@ process duplicate_Gene {
 	
 	output:
 	file("${pair_id}.merged.DUP_survivor.bed")
-	file("${pair_id}.gene_duplicated.bed")
-	file("${pair_id}.gene_duplicated_bis.csv")
-	tuple val(pair_id) into duplicated_gene_ch
+	file("${pair_id}.intersectBed.csv")
+	tuple val(pair_id), file("${pair_id}.gene_duplicated.bed") into duplicated_gene_ch
 	
 	script:	
 	
 	"""
 	bcftools query -f "%CHROM\\t%POS\\t%INFO/END\\t%ALT\\t%INFO/SVLEN\\n" ${pair_id}.merged.DUP_survivor.vcf > ${pair_id}.bed
 	
-	awk -F '\t' '{if(\$5>500) {print \$0}}' ${pair_id}.bed > ${pair_id}.merged.DUP_survivor.bed
-	
+	awk -F "\\t" '{if(\$5>500) {print \$0}}' ${pair_id}.bed > ${pair_id}.merged.DUP_survivor.bed
+
 	
 	bedtools intersect -a ${annotation} -b ${pair_id}.merged.DUP_survivor.bed -f 0.1 -wa| bedtools sort | uniq > ${pair_id}.gene_duplicated.bed
+
 	
-	bedtools intersect -a ${annotation} -b ${pair_id}.merged.DUP_survivor.bed -f 0.1 -wo| bedtools sort | uniq > ${pair_id}.gene_duplicated_bis.csv
+	bedtools intersect -a ${annotation} -b ${pair_id}.merged.DUP_survivor.bed -f 0.1 -wa -wb|uniq > ${pair_id}.intersectBed.csv
 	
 	"""
 }
-
-
-
-
