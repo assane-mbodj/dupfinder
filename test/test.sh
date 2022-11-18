@@ -1,14 +1,13 @@
 #!/bin/bash
-set -e 
 
-mkdir -p test_sample && cd test_sample && \
+set -e
 
-nextflow run ../dupfinder/dupfinder.nf \
---c ../dupfinder/nextflow.config \
---genome_file ../test/Arabido.fasta \
---reads "../test/sample_{R1,R2}.fastq.gz" \
---annot ../test/Araport11_gene.gff.gz \
+nextflow run dupfinder.nf \
+--c nextflow.config \
+--genome_file test/Arabido.fasta \
+--reads "test/sample_{R1,R2}.fastq.gz" \
+--annot test/Araport11_gene.gff.gz \
 --out test_out \
--w test_work
+-w work
 
-echo "test successful: Goog Analyze with dupfinder pipeline"
+echo "test successful: Good Analysis with dupfinder pipeline V1.0.0"
