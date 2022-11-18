@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e 
 
-mkdir -p test_wd && cd test_wd && \
+mkdir -p test_sample && cd test_sample && \
 
 nextflow run ../dupfinder/dupfinder.nf \
 --c ../dupfinder/nextflow.config \
