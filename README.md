@@ -66,7 +66,7 @@ conda activate dupfinder_env
 ```
 ## Dupfinder test data
 
-You can finally run the test.sh script with the command line below to see if dufinder has been installed on your machine.
+You can finally run the test.sh script with the command line below to see if dupfinder has been installed on your machine.
 
 ```bash
    bash test/test.sh
