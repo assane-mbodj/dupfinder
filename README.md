@@ -116,7 +116,7 @@ DUPFinder can be used to run multiple samples using a single command. For exempl
 nextflow run dupfinder.nf --c file.config --genome_file reference.fa --reads "*_{1,2}.fastq" --annot file.bed --out Output_DUPFinder
 ```
 
-##OUTPUT
+## OUTPUT
 
 The outputs are specified on the variant_calls folder containing the CNV calls of the three callers, on the duplicate_annot_calls folder containing the annotated duplications and on the duplicated_gene folder containing the gene duplications.
 
