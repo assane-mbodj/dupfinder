@@ -23,11 +23,11 @@ The pipeline is built using nextflow, a workflow tool that makes it very easy to
 
 ## Workflow of DUPFinder
 
-* Aligning reads to a reference genome using [**bwa mem**](https://github.com/dellytools/delly)
-* Calling CNVs using the structural variant callers **[Delly**], [**Dysgu**], [**Lumpy-sv**] and [**Delly**]
-* Post-processing each set of CNVs to keep the duplications and remove false positives [**Duphold**], [**Bcftools**]
-* Merging all sets of duplications into one large set [**SURVIVOR**]
-* Detection of duplication gene using the annotation file [**Bedtools**]
+* Aligning reads to a reference genome using [**bwa mem**]
+* Calling CNVs using the structural variant callers **[Delly**](https://github.com/dellytools/delly), [**Dysgu**](https://github.com/kcleal/dysgu), [**Lumpy-sv**](https://github.com/arq5x/lumpy-sv) and [**smoove**](https://github.com/brentp/smoove)
+* Post-processing each set of CNVs to keep the duplications and remove false positives [**Duphold**](https://github.com/brentp/duphold), [**Bcftools**](https://github.com/samtools/bcftools)
+* Merging all sets of duplications into one large set [**SURVIVOR**](https://github.com/fritzsedlazeck/SURVIVOR)
+* Detection of duplication gene using the annotation file [**Bedtools**](https://github.com/arq5x/bedtools2)
 
 <p align="center">
     <img title="DUPFinder workflow" src="workflow/workflow_dupfinder.png" width=110%>
@@ -37,9 +37,9 @@ The pipeline is built using nextflow, a workflow tool that makes it very easy to
 
 ### Prerequisites
 
-DUPFinder can only be installed on Linux systems and requires Anaconda/Miniconda (Python 3.9+) to be present on the system.
+DUPFinder can only be installed on Linux systems and requires **Anaconda/Miniconda (Python 3.9+)** to be present on the system.
 
-All steps of Hecaton are run using the [`Nextflow`](https://www.nextflow.io/docs/latest/getstarted.html#installation) (`>=22.10`) workflow language.
+All steps of Hecaton are run using the [**`Nextflow`**](https://www.nextflow.io/docs/latest/getstarted.html#installation) (`>=22.10`) workflow language.
 
 ## Getting Started
 ## <a name="install"></a>Quick installation using conda 
