@@ -24,7 +24,7 @@ The pipeline is built using nextflow, a workflow tool that makes it very easy to
 ## Workflow of DUPFinder
 
 * Aligning reads to a reference genome using [**bwa mem**]
-* Calling CNVs using the structural variant callers **[Delly**](https://github.com/dellytools/delly), [**Dysgu**](https://github.com/kcleal/dysgu), [**Lumpy-sv**](https://github.com/arq5x/lumpy-sv) and [**smoove**](https://github.com/brentp/smoove)
+* Calling CNVs using the structural variant callers [**Delly**](https://github.com/dellytools/delly), [**Dysgu**](https://github.com/kcleal/dysgu), [**Lumpy-sv**](https://github.com/arq5x/lumpy-sv) and [**smoove**](https://github.com/brentp/smoove)
 * Post-processing each set of CNVs to keep the duplications and remove false positives [**Duphold**](https://github.com/brentp/duphold), [**Bcftools**](https://github.com/samtools/bcftools)
 * Merging all sets of duplications into one large set [**SURVIVOR**](https://github.com/fritzsedlazeck/SURVIVOR)
 * Detection of duplication gene using the annotation file [**Bedtools**](https://github.com/arq5x/bedtools2)
