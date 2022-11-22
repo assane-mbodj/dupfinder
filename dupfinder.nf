@@ -184,7 +184,7 @@ process vcf_filter {
 	
 	duphold -t 4 -v ${pair_id}.dysgu.DUP.vcf -b ${pair_id}.sort.bam -f ${genome_file} -o ${pair_id}.dysgu.DUP_duphold.vcf
 	
-	bcftools view -i "((FMT/DHFC[0]>=1.3 & FMT/DHFFC[0]>=1.3 & FMT/DHBFC[0]>=1.3) || (INFO/PE>=1 && INFO/SR>=1))" ${pair_id}.dysgu.DUP_duphold.vcf > ${pair_id}.dysgu.DUP_fc1.5.vcf
+	bcftools view -i "((FMT/DHFC[0]>=1.3 & FMT/DHFFC[0]>=1.3 & FMT/DHBFC[0]>=1.3) && (INFO/PE>=1 && INFO/SR>=1))" ${pair_id}.dysgu.DUP_duphold.vcf > ${pair_id}.dysgu.DUP_fc.vcf
 	
 	bcftools view -i '(SVTYPE = "DUP")' ${pair_id}.delly.vcf > ${pair_id}.delly.DUP.vcf
 	
@@ -192,7 +192,7 @@ process vcf_filter {
 	export DUPHOLD_SAMPLE_NAME=${pair_id}
 	
 	duphold -t 4 -v ${pair_id}.delly.DUP.vcf -b ${pair_id}.sort.bam -f ${genome_file} -o ${pair_id}.delly.DUP_duphold.vcf
-	bcftools view -i "(FMT/DHFC[0]>=1.3 & FMT/DHFFC[0]>=1.3 & FMT/DHBFC[0]>=1.3)" ${pair_id}.delly.DUP_duphold.vcf > ${pair_id}.delly.DUP_fc1.5.vcf
+	bcftools view -i "(FMT/DHFC[0]>=1.3 & FMT/DHFFC[0]>=1.3 & FMT/DHBFC[0]>=1.3)" ${pair_id}.delly.DUP_duphold.vcf > ${pair_id}.delly.DUP_fc.vcf
 	
 	bcftools view -i '(SVTYPE = "DUP")' ${pair_id}.smoove.vcf > ${pair_id}.smoove.DUP.vcf
 	
@@ -201,9 +201,9 @@ process vcf_filter {
 	
 	duphold -t 4 -v ${pair_id}.smoove.DUP.vcf -b ${pair_id}.sort.bam -f ${genome_file} -o ${pair_id}.smoove.DUP_duphold.vcf
 	
-	bcftools view -i "((FMT/DHFC[0]>=1.3 & FMT/DHFFC[0]>=1.3 & FMT/DHBFC[0]>=1.3) || (INFO/PE>=1 && INFO/SR>=1))" ${pair_id}.smoove.DUP_duphold.vcf > ${pair_id}.smoove.DUP_fc1.5.vcf
+	bcftools view -i "((FMT/DHFC[0]>=1.3 & FMT/DHFFC[0]>=1.3 & FMT/DHBFC[0]>=1.3) && (INFO/PE>=1 && INFO/SR>=1))" ${pair_id}.smoove.DUP_duphold.vcf > ${pair_id}.smoove.DUP_fc1.vcf
 	
-	ls ${pair_id}.dysgu.DUP_fc1.5.vcf ${pair_id}.delly.DUP_fc1.5.vcf ${pair_id}.smoove.DUP_fc1.5.vcf > ${pair_id}.txt
+	ls ${pair_id}.dysgu.DUP_fc.vcf ${pair_id}.delly.DUP_fc.vcf ${pair_id}.smoove.DUP_fc.vcf > ${pair_id}.txt
 	
 	SURVIVOR merge ${pair_id}.txt 50 2 1 1 0 50 ${pair_id}.merged.DUP_survivor.vcf
 	
