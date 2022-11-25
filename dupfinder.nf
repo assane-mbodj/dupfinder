@@ -168,9 +168,9 @@ process vcf_filter {
 	file genome_file
 	
 	output:
-	file("${pair_id}.dysgu.DUP_fc1.5.vcf")
-	file("${pair_id}.delly.DUP_fc1.5.vcf")
-	file("${pair_id}.smoove.DUP_fc1.5.vcf")
+	file("${pair_id}.dysgu.DUP_fc.vcf")
+	file("${pair_id}.delly.DUP_fc.vcf")
+	file("${pair_id}.smoove.DUP_fc.vcf")
 	file("*duphold.vcf")	
 	tuple val(pair_id), file("${pair_id}.merged.DUP_survivor.vcf") into duplication_annot_calls_ch
 	
