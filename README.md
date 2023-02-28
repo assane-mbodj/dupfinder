@@ -118,9 +118,18 @@ nextflow run dupfinder.nf --c file.config --genome_file reference.fa --reads "*_
 
 ## OUTPUT
 
-The outputs are specified on the **variant_calls** folder containing the CNV calls of the three callers, on the **duplicate_annot_calls** folder containing the annotated duplications and on the **duplicated_gene** folder containing the gene duplications.
+The outputs are specified on the table below **variant_calls** folder containing the CNV calls of the three callers, on the **duplicate_annot_calls** folder containing the annotated duplications, **merge_vcf** folder  and on the **duplicated_gene** folder containing the gene duplications.
 
 
+**Overview**
+
+|Col|Type  |Description                                                                        |
+|--:|:----:|:----------------------------------------------------------------------------------|
+|1  |folder|Folder containing alignment files **Bam_files**                                  |
+|2  |folder|Folder containing Variants calling files **variant_calls**                       |
+|3  |folder|Folder containing filtered duplicate regions files **duplication_annot_calls**   |
+|4  |folder|Folder containing gene duplications detected files **detected_gene**             |
+|5  |folder|Folder containing merging of all duplicate callers files **merge_vcf**           |
 
 
 
