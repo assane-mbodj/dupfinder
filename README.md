@@ -88,7 +88,7 @@ bwa index reference.fa
 ```
 DUPfinder: Tool for detecting duplicate gene using Illumina sequencing data.
 
-  DUPFinder version: v1.0.0
+  DUPFinder version: v1.1.0
  
     Usage: nextflow run dupfinder.nf --c file.config --genome_file reference.fa --reads "pair_id_{1,2}.fastq" --annot file.bed --out Output_DUPFinder
 
