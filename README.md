@@ -1,4 +1,4 @@
-# DUPFinder: Detection tools of Duplicated genes using Illumina and Nanopore sequencing data
+# DupFinder: Detection tools of Duplicated genes using Illumina and Nanopore sequencing data
 
 DupFinder, a gene duplication detection tool based on a combination of several variant calling tools and efficient filtering methods, the aim of which is to generate the broadest possible duplication catalogue minimising the false positive rate. DupFinder combines both short-read data from Illumina sequencing and long-read data from Nanopore sequencing.
 
@@ -21,7 +21,7 @@ It is specifically designed for plant data but can work well with human data wit
 The pipeline is built using nextflow, a workflow tool that makes it very easy to run tasks across multiple computational infrastructures. It uses containers like Docker or Singularity or cross-platform package and environment managers like Conda; these make the workflow more reproducible. The Nextflow implementation on this pipeline uses the Conda package manager which easily manages the maintenance and update of the software used by the pipeline as well as the dependencies.
 
 
-## Workflow of DUPFinder
+## Workflow of DupFinder
 
 * Aligning reads to a reference genome using [**bwa mem**](https://github.com/lh3/bwa) for Illumina data (short reads sequencing) and [**minimap2**](https://github.com/lh3/minimap2) for Nanopore data (long reads sequencing)
 * Calling CNVs using the structural variant callers on Illumina data [**Delly**](https://github.com/dellytools/delly), [**Dysgu**](https://github.com/kcleal/dysgu), [**Lumpy-sv**](https://github.com/arq5x/lumpy-sv) and [**smoove**](https://github.com/brentp/smoove) 
@@ -31,23 +31,23 @@ The pipeline is built using nextflow, a workflow tool that makes it very easy to
 * Detection of duplication gene using the annotation file [**Bedtools**](https://github.com/arq5x/bedtools2)
 
 <p align="center">
-    <img title="DUPFinder workflow" src="workflow/pipeline.png" width=110%>
+    <img title="DupFinder workflow" src="workflow/pipeline.png" width=110%>
 </p>
 
 ## Installation
 
 ### Prerequisites
 
-DUPFinder can only be installed on Linux systems and requires **Anaconda/Miniconda (Python 3.9+)** to be present on the system.
+DupFinder can only be installed on Linux systems and requires **Anaconda/Miniconda (Python 3.9+)** to be present on the system.
 
-All steps of Hecaton are run using the [**`Nextflow`**](https://www.nextflow.io/docs/latest/getstarted.html#installation) (`>=22.10`) workflow language.
+All steps of DupFinder are run using the [**`Nextflow`**](https://www.nextflow.io/docs/latest/getstarted.html#installation) (`>=22.10`) workflow language.
 
 ## Getting Started
 ## <a name="install"></a>Quick installation using conda 
 
 ```bash
 
-#Step 1. Download the dUPFinder :
+#Step 1. Download the DupFinder :
 
 git clone https://github.com/assane-mbodj/dupfinder
 
@@ -65,9 +65,9 @@ bash install.sh
 
 conda activate dupfinder_env
 ```
-## Dupfinder test data
+## DupFinder test data
 
-You can finally run the test.sh script with the command line below to see if dupfinder has been installed on your machine.
+You can finally run the test.sh script with the command line below to see if DupFinder has been installed on your machine.
 
 ```bash
    bash test/test.sh
@@ -87,13 +87,18 @@ bwa index reference.fa
 ## <a name="Usage"></a>Usage
 
 ```
-DUPfinder: Tool for detecting duplicate gene using Illumina sequencing data.
+DupFinder: Tool for detecting duplicate gene using Illumina sequencing data.
 
-  DUPFinder version: v1.0.0
+  DupFinder version: v1.0.0
  
-    Usage: nextflow run dupfinder.nf --c file.config --genome_file reference.fa --reads "pair_id_{1,2}.fastq" --annot file.bed --out Output_DUPFinder
+    Usage:
+	For Illumina data:
+	nextflow run dupfinder.nf --sr --c file.config --genome_file reference.fa --reads "pair_id_{1,2}.fastq" --annot file.bed --out Output_DupFinder.
 
-    Command arguments DUPFinder: The following parameters need to be specified when running DUPFinder
+	For Nanopores data:
+	nextflow run dupfinder.nf --lr --c file.config --genome_file reference.fasta --reads_lr "pair_id.fastq" --annot file.bed --out Output_DupFinder
+
+    Command arguments DupFinder: The following parameters need to be specified when running DupFinder
     
 	    --genome_file: Reference genome in FASTA format
 
@@ -109,7 +114,7 @@ DUPfinder: Tool for detecting duplicate gene using Illumina sequencing data.
 
 	    --out: Output directory to which all results will be written
 
-	    --c: Config file specifying the number of CPU cores and memory that will be assigned to DUPFinder
+	    --c: Config file specifying the number of CPU cores and memory that will be assigned to DupFinder
 	   	   	    
        Optional arguments:
 
@@ -119,9 +124,9 @@ DUPfinder: Tool for detecting duplicate gene using Illumina sequencing data.
 ```
 
 ### <a name="multiple"></a>Running multiple samples at once
-DUPFinder can be used to run multiple samples using a single command. For exemple if there existe several sample paired-end, they can all be processed using:
+DupFinder can be used to run multiple samples using a single command. For exemple if there existe several sample paired-end, they can all be processed using:
 ```bash
-nextflow run dupfinder.nf --c file.config --genome_file reference.fa --reads "*_{1,2}.fastq" --annot file.bed --out Output_DUPFinder
+nextflow run dupfinder.nf --c file.config --genome_file reference.fa --reads "*_{1,2}.fastq" --annot file.bed --out Output_DupFinder
 ```
 
 ## OUTPUT
