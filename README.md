@@ -91,14 +91,14 @@ DupFinder: Tool for detecting duplicate gene using Illumina sequencing data.
 
   DupFinder version: v1.0.0
  
-   **Usage:**
+   Usage:
 	For Illumina data:
 	nextflow run dupfinder.nf --sr --c file.config --genome_file reference.fa --reads_sr "pair_id_{1,2}.fastq" --annot file.bed --out Output_DupFinder
 
 	For Nanopores data:
 	nextflow run dupfinder.nf --lr --c file.config --genome_file reference.fasta --reads_lr "pair_id.fastq" --annot file.bed --out Output_DupFinder
 
-    **Command arguments DupFinder**: The following parameters need to be specified when running DupFinder
+    Command arguments DupFinder: The following parameters need to be specified when running DupFinder
     
 	    --genome_file: Reference genome in FASTA format
 
@@ -116,11 +116,11 @@ DupFinder: Tool for detecting duplicate gene using Illumina sequencing data.
 
 	    --c: Config file specifying the number of CPU cores and memory that will be assigned to DupFinder
 	   	   	    
-       Optional arguments:
+   Optional arguments:
 
 	    -w: Working directory to which intermediate results will be written. Default: work
 
-            -v               version
+            -v:               version
 ```
 
 ### <a name="multiple"></a>Running multiple samples at once
