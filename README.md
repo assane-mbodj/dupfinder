@@ -96,17 +96,25 @@ DUPfinder: Tool for detecting duplicate gene using Illumina sequencing data.
     Command arguments DUPFinder: The following parameters need to be specified when running DUPFinder
     
 	    --genome_file: Reference genome in FASTA format
+
 	    --reads_sr: set of paired-end short reads in FASTQ format. Gzipped FASTQ files are allowed
+
 	    --reads_lr: set of single-end long reads in FASTQ format. Gzipped FASTQ files are allowed
+
 	    --sr: allow to run the short reads version
+
 	    --lr: allow to run the long reads version
 
 	    --annot: the file containing the gene annotation: it can be in gff or bed format and must be tabulated
+
 	    --out: Output directory to which all results will be written
+
 	    --c: Config file specifying the number of CPU cores and memory that will be assigned to DUPFinder
 	   	   	    
-	    Optional arguments:
+       Optional arguments:
+
 	    -w: Working directory to which intermediate results will be written. Default: work
+
             -v               version
 ```
 
