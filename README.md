@@ -23,8 +23,9 @@ The pipeline is built using nextflow, a workflow tool that makes it very easy to
 
 ## Workflow of DUPFinder
 
-* Aligning reads to a reference genome using [**bwa mem**](https://github.com/lh3/bwa)
-* Calling CNVs using the structural variant callers [**Delly**](https://github.com/dellytools/delly), [**Dysgu**](https://github.com/kcleal/dysgu), [**Lumpy-sv**](https://github.com/arq5x/lumpy-sv) and [**smoove**](https://github.com/brentp/smoove)
+* Aligning reads to a reference genome using [**bwa mem**](https://github.com/lh3/bwa) for Illumina data (short reads sequencing) and [**minimap2**](https://github.com/lh3/minimap2) for Nanopore data (long reads sequencing)
+* Calling CNVs using the structural variant callers on Illumina data [**Delly**](https://github.com/dellytools/delly), [**Dysgu**](https://github.com/kcleal/dysgu), [**Lumpy-sv**](https://github.com/arq5x/lumpy-sv) and [**smoove**](https://github.com/brentp/smoove) 
+* Calling CNVs using the structural variant callers on Nanopore data  [**Sniffles**](https://github.com/fritzsedlazeck/Sniffles), [**Svim**](https://github.com/eldariont/svim), [**cute
 * Post-processing each set of CNVs to keep the duplications and remove false positives [**Duphold**](https://github.com/brentp/duphold), [**Bcftools**](https://github.com/samtools/bcftools)
 * Merging all sets of duplications into one large set [**SURVIVOR**](https://github.com/fritzsedlazeck/SURVIVOR)
 * Detection of duplication gene using the annotation file [**Bedtools**](https://github.com/arq5x/bedtools2)
@@ -88,7 +89,7 @@ bwa index reference.fa
 ```
 DUPfinder: Tool for detecting duplicate gene using Illumina sequencing data.
 
-  DUPFinder version: v1.1.0
+  DUPFinder version: v1.0.0
  
     Usage: nextflow run dupfinder.nf --c file.config --genome_file reference.fa --reads "pair_id_{1,2}.fastq" --annot file.bed --out Output_DUPFinder
 
