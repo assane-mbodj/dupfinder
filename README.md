@@ -1,4 +1,4 @@
-# DUPFinder: Detection tools of Duplicated genes
+# DUPFinder: Detection tools of Duplicated genes using Illumina and Nanopore sequencing data
 
 DUPfinder is a tool to characterize duplicated genes based on the detection of structural variations (CNV) and especially duplications from a sample or a population of samples.
 
@@ -25,13 +25,13 @@ The pipeline is built using nextflow, a workflow tool that makes it very easy to
 
 * Aligning reads to a reference genome using [**bwa mem**](https://github.com/lh3/bwa) for Illumina data (short reads sequencing) and [**minimap2**](https://github.com/lh3/minimap2) for Nanopore data (long reads sequencing)
 * Calling CNVs using the structural variant callers on Illumina data [**Delly**](https://github.com/dellytools/delly), [**Dysgu**](https://github.com/kcleal/dysgu), [**Lumpy-sv**](https://github.com/arq5x/lumpy-sv) and [**smoove**](https://github.com/brentp/smoove) 
-* Calling CNVs using the structural variant callers on Nanopore data  [**Sniffles**](https://github.com/fritzsedlazeck/Sniffles), [**Svim**](https://github.com/eldariont/svim), [**cute
+* Calling CNVs using the structural variant callers on Nanopore data  [**Sniffles**](https://github.com/fritzsedlazeck/Sniffles), [**Svim**](https://github.com/eldariont/svim), [**cuteSV**](https://github.com/tjiangHIT/cuteSV)
 * Post-processing each set of CNVs to keep the duplications and remove false positives [**Duphold**](https://github.com/brentp/duphold), [**Bcftools**](https://github.com/samtools/bcftools)
 * Merging all sets of duplications into one large set [**SURVIVOR**](https://github.com/fritzsedlazeck/SURVIVOR)
 * Detection of duplication gene using the annotation file [**Bedtools**](https://github.com/arq5x/bedtools2)
 
 <p align="center">
-    <img title="DUPFinder workflow" src="workflow/workflow_dupfinder.png" width=110%>
+    <img title="DUPFinder workflow" src="workflow/pipeline.png" width=110%>
 </p>
 
 ## Installation
@@ -95,19 +95,18 @@ DUPfinder: Tool for detecting duplicate gene using Illumina sequencing data.
 
     Command arguments DUPFinder: The following parameters need to be specified when running DUPFinder
     
-	    --genome_file       Reference genome in FASTA format
-	    
-	    --reads             set of paired-end reads in FASTQ format. Gzipped FASTQ files are allowed
-	    
-	    --annot             the file containing the gene annotation: it can be in gff or bed format and must be tabulated
-	    
-	    --out               Output directory to which all results will be written
-	    
-	    --c                 Config file specifying the number of CPU cores and memory that will be assigned to DUPFinder
-	   	    
-	   	    
-    Optional arguments:
-	    -w               Working directory to which intermediate results will be written. Default: work
+	    --genome_file: Reference genome in FASTA format
+	    --reads_sr: set of paired-end short reads in FASTQ format. Gzipped FASTQ files are allowed
+	    --reads_lr: set of single-end long reads in FASTQ format. Gzipped FASTQ files are allowed
+	    --sr: allow to run the short reads version
+	    --lr: allow to run the long reads version
+
+	    --annot: the file containing the gene annotation: it can be in gff or bed format and must be tabulated
+	    --out: Output directory to which all results will be written
+	    --c: Config file specifying the number of CPU cores and memory that will be assigned to DUPFinder
+	   	   	    
+	    Optional arguments:
+	    -w: Working directory to which intermediate results will be written. Default: work
             -v               version
 ```
 
@@ -131,7 +130,6 @@ The outputs are specified on the table below **variant_calls** folder containing
 |3  |folder|Folder containing filtered duplicate regions files **duplication_annot_calls**   |
 |4  |folder|Folder containing gene duplications detected files **detected_gene**             |
 |5  |folder|Folder containing merging of all duplicate callers files **merge_vcf**           |
-
 
 
 
