@@ -91,14 +91,14 @@ DupFinder: Tool for detecting duplicate gene using Illumina sequencing data.
 
   DupFinder version: v1.0.0
  
-    Usage:
+   **Usage:**
 	For Illumina data:
-	nextflow run dupfinder.nf --sr --c file.config --genome_file reference.fa --reads "pair_id_{1,2}.fastq" --annot file.bed --out Output_DupFinder.
+	nextflow run dupfinder.nf --sr --c file.config --genome_file reference.fa --reads_sr "pair_id_{1,2}.fastq" --annot file.bed --out Output_DupFinder
 
 	For Nanopores data:
 	nextflow run dupfinder.nf --lr --c file.config --genome_file reference.fasta --reads_lr "pair_id.fastq" --annot file.bed --out Output_DupFinder
 
-    Command arguments DupFinder: The following parameters need to be specified when running DupFinder
+    **Command arguments DupFinder**: The following parameters need to be specified when running DupFinder
     
 	    --genome_file: Reference genome in FASTA format
 
@@ -126,7 +126,13 @@ DupFinder: Tool for detecting duplicate gene using Illumina sequencing data.
 ### <a name="multiple"></a>Running multiple samples at once
 DupFinder can be used to run multiple samples using a single command. For exemple if there existe several sample paired-end, they can all be processed using:
 ```bash
-nextflow run dupfinder.nf --c file.config --genome_file reference.fa --reads "*_{1,2}.fastq" --annot file.bed --out Output_DupFinder
+	For Illumina data:
+	    nextflow run dupfinder.nf --sr --c file.config --genome_file reference.fa --reads_sr "*_{1,2}.fastq" --annot file.bed --out Output_DupFinder
+
+	For Nanopore data:
+	    nextflow run dupfinder.nf --lr --c file.config --genome_file reference.fa --reads_lr "*.fastq" --annot file.bed --out Output_DupFinder
+
+
 ```
 
 ## OUTPUT
