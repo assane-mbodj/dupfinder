@@ -1,6 +1,6 @@
 # DUPFinder: Detection tools of Duplicated genes using Illumina and Nanopore sequencing data
 
-DUPfinder is a tool to characterize duplicated genes based on the detection of structural variations (CNV) and especially duplications from a sample or a population of samples.
+DupFinder, a gene duplication detection tool based on a combination of several variant calling tools and efficient filtering methods, the aim of which is to generate the broadest possible duplication catalogue minimising the false positive rate. DupFinder combines both short-read data from Illumina sequencing and long-read data from Nanopore sequencing.
 
 ## Table of contents
 
