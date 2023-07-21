@@ -5,7 +5,7 @@ DupFinder, a gene duplication detection tool based on a combination of several v
 ## Table of contents
 
 - [introduction](#introduction)
-- [Workflow of Hecaton](#overview)
+- [Workflow of DupFinder](#overview)
 - [Installation](#install)
   - [Prerequisites](#prerequisites)
   - [Gettind installation](#Getting)
