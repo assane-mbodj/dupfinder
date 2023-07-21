@@ -73,7 +73,7 @@ You can finally run the test.sh script with the command line below to see if Dup
    bash test/test.sh
 ```
 
-## Index Reference genome
+## Index Reference genome for Illumina data
 
 Before starting, create index file for the reference genome to reduce mapping time using the command following.
 
@@ -87,9 +87,9 @@ bwa index reference.fa
 ## <a name="Usage"></a>Usage
 
 ```
-DupFinder: Tool for detecting duplicate gene using Illumina sequencing data.
+DupFinder: Tool for detecting duplicate gene using Illumina and Nanopore sequencing data.
 
-  DupFinder version: v1.0.0
+  DupFinder version: v2.0.0
  
    Usage:
 	For Illumina data:
@@ -124,7 +124,7 @@ DupFinder: Tool for detecting duplicate gene using Illumina sequencing data.
 ```
 
 ### <a name="multiple"></a>Running multiple samples at once
-DupFinder can be used to run multiple samples using a single command. For exemple if there existe several sample paired-end, they can all be processed using:
+DupFinder can be used to run multiple samples using a single command. For exemple if there existe several sample paired-end for Illumina or Single-end for Nanopore, they can all be processed using:
 ```bash
 	For Illumina data:
 	    nextflow run dupfinder.nf --sr --c file.config --genome_file reference.fa --reads_sr "*_{1,2}.fastq" --annot file.bed --out Output_DupFinder
