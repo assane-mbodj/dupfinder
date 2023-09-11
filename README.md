@@ -153,6 +153,13 @@ The outputs are specified on the table below **variant_calls** folder containing
 
 
 
+# Contact
+DupFinder
+
+Copyright © 2023 Assane Mbodj (assanembodj11@gmail.com)
+
+Any question, concern, or bug report about the program should be posted as an Issue on GitHub. Before posting, please check previous issues (both Open and Closed) to see if your issue has been addressed already. Also, please follow these good GitHub practices.
+
 
 
 
