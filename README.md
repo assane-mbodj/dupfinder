@@ -1,3 +1,5 @@
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&pause=1000&color=3451E6FB&width=435&lines=Welcome+to+DupFinder+Repository;Ask+me+any+questions+on+Issue" alt="Typing SVG" /></a>
+
 # DupFinder: Detection tools of Duplicated genes using Illumina and Nanopore sequencing data
 
 DupFinder, a gene duplication detection tool based on a combination of several variant calling tools and efficient filtering methods, the aim of which is to generate the broadest possible duplication catalogue minimising the false positive rate. DupFinder combines both short-read data from Illumina sequencing and long-read data from Nanopore sequencing.
