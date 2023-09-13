@@ -1,4 +1,4 @@
-<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=100&size=23&pause=1000&color=3451E6FB&width=435&lines=Welcome+to+DupFinder+Repository;Ask+me+any+questions+on+Issue" alt="Typing SVG" /></a>
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=100&size=23&duration=5029&pause=1000&color=3451E6FB&center=true&width=435&lines=Welcome+to+DupFinder+Repository;Ask+me+any+questions+on+Issue" alt="Typing SVG" /></a>
 
 # DupFinder: Detection tools of Duplicated genes using Illumina and Nanopore sequencing data
 
