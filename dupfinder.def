@@ -1,0 +1,129 @@
+Bootstrap: docker
+From: ubuntu:20.04
+
+%help
+    This Singularity container is built for running dupfinder and related bioinformatics tools.
+
+%labels
+    Maintainer Your Name <your.email@example.com>
+    Version 1.0
+
+%post
+    # Mettre à jour le système et installer les dépendances
+    #apt-get update && apt-get install -y  \
+    apt-get update && DEBIAN_FRONTEND="noninteractive" TZ="Europe/France" apt-get install -y tzdata && apt-get install -y  \
+        build-essential \
+        curl \
+        wget \
+        ca-certificates \
+        zlib1g-dev \
+        libssl-dev \
+        libcurl4-openssl-dev \
+        libopenblas-dev \
+        liblapack-dev \
+        libtiff5-dev \
+        libpng-dev \
+        libbz2-dev \
+        libffi-dev \
+        libgomp1 \
+        libsqlite3-dev \
+        libncurses5-dev \
+        libncursesw5-dev \
+        xz-utils \
+        tk-dev \
+        libharfbuzz-dev \
+        libicu-dev \
+        libxml2-dev \
+        libfontconfig1-dev \
+        libfreetype6-dev \
+        libgraphite2-dev \
+        fonts-dejavu-core \
+        fonts-ubuntu \
+        alsa-utils \
+        bzip2 \
+        libjpeg-dev \
+        libwebp-dev \
+        openjdk-17-jdk \
+        gawk \
+        libedit-dev \
+        fontconfig-config \
+        libxrender-dev \
+        libxext-dev \
+        libxi-dev \
+        libxtst-dev \
+        libsm-dev \
+        libice-dev \
+        gsl-bin \
+        libgsl-dev \
+        libboost-dev \
+        git \
+        cmake
+
+    # Télécharger et installer samtools
+    cd /opt && \
+    wget https://github.com/samtools/samtools/releases/download/1.16.1/samtools-1.16.1.tar.bz2 && \
+    tar -xvjf samtools-1.16.1.tar.bz2 && \
+    cd samtools-1.16.1 && \
+    ./configure --prefix=/usr/local && \
+    make && \
+    make install && \
+    cd /opt && rm -rf samtools-1.16.1 samtools-1.16.1.tar.bz2
+
+    # Télécharger et installer bwa
+    cd /opt && \
+    git clone https://github.com/lh3/bwa.git && \
+    cd bwa && \
+    make && \
+    cp bwa /usr/local/bin && \
+    cd /opt && rm -rf bwa
+
+    # Télécharger et installer bedtools
+    cd /opt && \
+    git clone https://github.com/arq5x/bedtools2.git && \
+    cd bedtools2 && \
+    make && \
+    cp bin/* /usr/local/bin && \
+    cd /opt && rm -rf bedtools2
+
+    # Télécharger et installer HTSlib (dépendance de samtools)
+    cd /opt && \
+    wget https://github.com/samtools/htslib/releases/download/1.16/htslib-1.16.tar.bz2 && \
+    tar -xvjf htslib-1.16.tar.bz2 && \
+    cd htslib-1.16 && \
+    ./configure --prefix=/usr/local && \
+    make && \
+    make install && \
+    cd /opt && rm -rf htslib-1.16 htslib-1.16.tar.bz2
+
+    # Télécharger et installer survivor
+    cd /opt && \
+    git clone https://github.com/fritzsedlazeck/SURVIVOR.git && \
+    cd SURVIVOR/Debug && \
+    cmake .. && \
+    make && \
+    cp SURVIVOR /usr/local/bin && \
+    cd /opt && rm -rf SURVIVOR
+
+    # Télécharger et installer Nextflow
+    cd /opt && \
+    wget -qO- https://get.nextflow.io | bash && \
+    mv nextflow /usr/local/bin/
+
+    # Nettoyage des fichiers temporaires pour réduire la taille de l'image
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+%environment
+    export PATH="/usr/local/bin:$PATH"
+
+%runscript
+    exec "$@"
+
+%test
+    # Vérification des installations
+    samtools --version
+    bwa
+    bedtools --version
+    SURVIVOR
+    nextflow -v
+
